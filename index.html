@@ -3,92 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChatGPT Customization</title>
+    <title>Login Page</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
         }
 
         .header {
-            background-color: #ffffff;
-            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            width: 100%;
+            padding: 10px;
             text-align: center;
-            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
-            position: relative;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            display: none; /* Initially hidden */
         }
 
-        .header h1 {
-            margin: 0;
-            font-size: 24px;
-            color: #333333;
-        }
-
-        .header h1 span {
-            color: #007bff;
-        }
-
-        .header .menu-icon {
-            position: absolute;
-            left: 20px;
-            top: 15px;
-            cursor: pointer;
-        }
-
-        .content {
+        .login-container {
+            background-color: #fff;
             padding: 20px;
-            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin-top: 60px; /* Extra margin for header */
         }
 
-        .content img {
-            width: 50px;
-            height: 50px;
+        .logo {
+            display: block;
+            margin: 0 auto 20px;
+            width: 100px;
+        }
+
+        h2 {
+            text-align: center;
             margin-bottom: 20px;
         }
 
-        .content .buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
+        .input-group {
+            margin-bottom: 15px;
         }
 
-        .content .buttons a {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #ffffff;
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            text-decoration: none;
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
             font-size: 16px;
         }
 
-        .content .buttons a:hover {
+        button:hover {
             background-color: #0056b3;
+        }
+
+        .forgot-password {
+            display: block;
+            text-align: center;
+            margin-top: 10px;
+            color: #007bff;
+        }
+
+        .forgot-password:hover {
+            color: #0056b3;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+            display: none;
         }
     </style>
 </head>
 <body>
 
-<div class="header">
-    <div class="menu-icon">
-        <img src="menu-icon.png" alt="Menu Icon">
-    </div>
-    <h1>MOSTAFIZUR <span>&#9660;</span></h1>
+<div class="header" id="developer-header">
+    Developer by Rahiyan
 </div>
 
-<div class="content">
-    <img src="logo.png" alt="Logo">
-    <div class="buttons">
-        <a href="#">Create an image for my presentation</a>
-        <a href="#">ChatGPT tips and tricks</a>
-    </div>
+<div class="login-container">
+    <form id="loginForm">
+        <img src="logo.png" alt="Logo" class="logo">
+        <h2>Login</h2>
+        <div class="input-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+        <div class="input-group">
+            <input type="checkbox" id="remember" name="remember">
+            <label for="remember">Remember me</label>
+        </div>
+        <button type="submit">Login</button>
+        <p id="error-message" class="error-message"></p>
+        <a href="/forgot-password" class="forgot-password">Forgot Password?</a>
+    </form>
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Replace the text with MOSTAFIZUR
-        document.querySelector(".header h1").textContent = "MOSTAFIZUR";
+    document.getElementById("loginForm").addEventListener("submit", function(event){
+        event.preventDefault();
+
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        var errorMessage = document.getElementById("error-message");
+        var header = document.getElementById("developer-header");
+
+        if (username === "rahiyan" && password === "himel") {
+            // Show header and redirect after a delay to see the change
+            header.style.display = "block";
+            setTimeout(function() {
+                window.location.href = "https://chatgpt.com";
+            }, 1000); // 1 second delay to show the header change before redirect
+        } else {
+            errorMessage.textContent = "Invalid username or password.";
+            errorMessage.style.display = "block";
+        }
     });
 </script>
 
